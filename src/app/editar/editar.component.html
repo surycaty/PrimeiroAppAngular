@@ -3,11 +3,7 @@
   <form id="contact" (ngSubmit)="onSubmit()">
 
       <h3>Prova DBC</h3>
-      
-      <app-navbar></app-navbar>
-
-      <h4>Cadastro de Cliente</h4>
-      
+      <h4>Alterar de Cliente</h4>
       
       <fieldset>
         <input type="text" id="nome" name="nome"
@@ -58,10 +54,10 @@
           <div *ngIf="mostrarTipoCliente == 'C'">
             <fieldset>
               <input type="checkbox" id="empregado" ng-model="empregado" tabindex="6" />
-              <label for="empregado">Está Empregado</label>
+              <label for="input-empregado">Está Empregado</label>
             </fieldset>
           </div>
-
+          
       </fieldset>
     
     <fieldset>

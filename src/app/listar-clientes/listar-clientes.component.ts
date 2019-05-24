@@ -4,7 +4,7 @@ import { ClienteService } from '../cliente.service';
 @Component({
   selector: 'app-listar-clientes',
   templateUrl: './listar-clientes.component.html',
-  styleUrls: ['./listar-clientes.component.css']
+  styleUrls: ['../app.component.css']
 })
 export class ListarClientesComponent implements OnInit {
 

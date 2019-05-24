@@ -1,36 +1,46 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { Cliente } from '../model/cliente.model';
 import { ClienteService } from '../cliente.service';
 
 @Component({
-  selector: 'app-cadastrar',
-  templateUrl: './cadastrar.component.html',
+  selector: 'app-editar',
+  templateUrl: './editar.component.html',
   styleUrls: ['../app.component.css']
 })
-
-export class CadastrarComponent implements OnInit {
-
-  mostrarTipoCliente: string;
+export class EditarComponent implements OnInit {
 
   cliente: Cliente;
+  mostrarTipoCliente: string;
 
-  constructor(private servico: ClienteService) { }
+  idPag: any;
 
-  ngOnInit() { 
+  constructor(private route: ActivatedRoute, private servico: ClienteService) { }
+
+  ngOnInit() {
+
     this.cliente = new Cliente();
+
     this.mostrarTipoCliente = "";
+
+    this.route.params.subscribe(p => this.idPag = p.id);
+
+    this.servico.getCliente(this.idPag).subscribe((cliente: Cliente) =>  {
+      this.cliente = cliente;
+      this.mostrarTipoCliente = this.cliente.tipoCliente;
+    });
+
   }
 
   onSubmit() {
+
     this.servico.salvar(this.cliente);
-    this.cliente = new Cliente();
+    
   }
 
   atualizarTipo(tipo){
     this.mostrarTipoCliente = tipo;
   }
-  
 
   atualizarRisco(renda) {
     console.log(renda);

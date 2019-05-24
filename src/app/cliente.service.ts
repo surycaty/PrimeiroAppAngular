@@ -7,23 +7,27 @@ import { Cliente } from './model/cliente.model';
 })
 export class ClienteService {
 
-  urlClienteRest = "http://localhost:8080/cliente/listar";
+  urlClienteRoot = "http://localhost:8080/cliente";
 
-  formData : Cliente;
+  //formData : Cliente;
 
   retorno: any;
 
   constructor(private http : HttpClient ) { }
 
   listarClientes(){
-    return this.http.get<any>(`${this.urlClienteRest}`);
+    return this.http.get<any>(`${this.urlClienteRoot + "/listar"}`);
   }
 
   salvar(cliente: Cliente) {
     console.log("Inicio Salvar Servico");
-    cliente.risco = 'A';
-    this.http.post("http://localhost:8080/cliente/salvar", cliente).subscribe(res => this.retorno = res);
+    
+    this.http.post(this.urlClienteRoot + "/salvar", cliente).subscribe(res => this.retorno = res);
 
     console.log(this.retorno);
+  }
+
+  getCliente(id) {
+    return this.http.get(this.urlClienteRoot + "/consultar?id=" + id);
   }
 }

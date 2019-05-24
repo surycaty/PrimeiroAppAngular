@@ -9,18 +9,24 @@ import { HttpClientModule } from '@angular/common/http';
 import { NavbarComponent } from './navbar/navbar.component';
 import { CadastrarComponent } from './cadastrar/cadastrar.component';
 import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { EmprestimoComponent } from './emprestimo/emprestimo.component';
+import { EditarComponent } from './editar/editar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ListarClientesComponent,
     NavbarComponent,
-    CadastrarComponent
+    CadastrarComponent,
+    EmprestimoComponent,
+    EditarComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    CommonModule,
     FormsModule
   ],
   providers: [ ClienteService ],
