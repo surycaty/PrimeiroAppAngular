@@ -8,20 +8,20 @@ import { ClienteService } from './cliente.service';
 import { HttpClientModule } from '@angular/common/http';
 import { NavbarComponent } from './navbar/navbar.component';
 import { CadastrarComponent } from './cadastrar/cadastrar.component';
-import { NgForm } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
     ListarClientesComponent,
     NavbarComponent,
-    CadastrarComponent,
-    NgForm
+    CadastrarComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [ ClienteService ],
   bootstrap: [AppComponent]

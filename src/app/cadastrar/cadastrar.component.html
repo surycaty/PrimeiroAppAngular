@@ -1,70 +1,67 @@
 <div class="container">
 
-  <form id="contact" ng-form="ngForm">
-    
-    <h3>Prova DBC</h3>
-    <h4>Cadastro de Cliente</h4>
-    
-    <fieldset>
-      <input type="text" ngMod id="input-nomeCliente" ng-model="nomeCliente" 
-      placeholder="Nome Cliente" tabindex="1" autofocus />
-    </fieldset>
-    
-    <fieldset>
-      <input type="text" id="input-rendimentoMensal" ng-model="rendimentoMensal" 
-      placeholder="Renda R$" tabindex="2" />
-    </fieldset>
-    
-    <fieldset>
-      <input type="text" id="input-risco" ng-model="risco" 
-      placeholder="Risco" tabindex="3" disabled="disabled" readonly="readonly" />
-    </fieldset>
-    
-    <fieldset>
-      <input type="text" id="input-endereco" ng-model="endereco" 
-      placeholder="Endereço" tabindex="4" />
-    </fieldset>
-    
-    <fieldset>
-      <input id="input-tipoEspecial" type="radio" name="tipoCliente" value="E" ng-model="tipoCliente" />
-      <label for="input-tipoEspecial">Especial</label>
-      
-      <input id="input-tipoPotencial" type="radio" name="tipoCliente" value="P" ng-model="tipoCliente" />
-      <label for="input-tipoPotencial">Potencial</label>
-      
-      <input id="input-tipoComum" type="radio" name="tipoCliente" value="C" ng-model="tipoCliente" />
-      <label for="input-tipoComum">Comum</label>
-    </fieldset>
-    
-    <fieldset>
-      <div ng-switch on="mostrarTipoCliente">
-        <div ng-switch-when="E">
-          <fieldset>
-            <input type="text" id="input-valorPatrimonio" name="valorPatrimonio" ng-model="valorPatrimonio" 
-                          placeholder="Valor Patrimonio" tabindex="6" />
-          </fieldset>
-        </div>
-        <div ng-switch-when="P">
-          <fieldset>
-            <input type="text" id="input-valorDivida" ng-model="valorDivida" 
-                          placeholder="Valor Dívida" tabindex="6" />
-          </fieldset>
-        </div>
-        <div ng-switch-when="C">
-          <fieldset>
-            <input type="checkbox" id="input-empregado" ng-model="empregado" tabindex="6" />
-            <label for="input-empregado">Está Empregado</label>
-          </fieldset>
-        </div>
-      </div>
-    </fieldset>
+  <form id="contact" (ngSubmit)="onSubmit()">
 
+      <h3>Prova DBC</h3>
+      <h4>Cadastro de Cliente</h4>
+      
+      <fieldset>
+        <input type="text" id="nome" name="nome"
+          placeholder="Nome Cliente" tabindex="1" [(ngModel)]="cliente.nomeCliente" autofocus />
+      </fieldset>
+
+      <fieldset>
+        <input type="text" id="input-rendimentoMensal" name="rendimentoMensal" [(ngModel)]="cliente.rendimentoMensal" 
+        placeholder="Renda R$" tabindex="2" />
+      </fieldset>
+      
+      <fieldset>
+        <input type="text" id="input-risco" name="risco" [(ngModel)]="cliente.risco" 
+        placeholder="Risco" tabindex="3" disabled="disabled" readonly="readonly" />
+      </fieldset>
+      
+      <fieldset>
+        <input type="text" id="input-endereco" name="endereco" [(ngModel)]="cliente.endereco" 
+        placeholder="Endereço" tabindex="4" />
+      </fieldset>
+      
+      <fieldset>
+        <input id="input-tipoEspecial" type="radio" name="tipoCliente" value="E" [(ngModel)]="cliente.tipoCliente" />
+        <label for="input-tipoEspecial">Especial</label>
+        
+        <input id="input-tipoPotencial" type="radio" name="tipoCliente" value="P" [(ngModel)]="cliente.tipoCliente" />
+        <label for="input-tipoPotencial">Potencial</label>
+        
+        <input id="input-tipoComum" type="radio" name="tipoCliente" value="C" [(ngModel)]="cliente.tipoCliente" />
+        <label for="input-tipoComum">Comum</label>
+      </fieldset>
+      
+      <fieldset>
+        <div ng-switch on="mostrarTipoCliente">
+          <div ng-switch-when="E">
+            <fieldset>
+              <input type="text" id="input-valorPatrimonio" name="valorPatrimonio" ng-model="valorPatrimonio" 
+                            placeholder="Valor Patrimonio" tabindex="6" />
+            </fieldset>
+          </div>
+          <div ng-switch-when="P">
+            <fieldset>
+              <input type="text" id="input-valorDivida" ng-model="valorDivida" 
+                            placeholder="Valor Dívida" tabindex="6" />
+            </fieldset>
+          </div>
+          <div ng-switch-when="C">
+            <fieldset>
+              <input type="checkbox" id="input-empregado" ng-model="empregado" tabindex="6" />
+              <label for="input-empregado">Está Empregado</label>
+            </fieldset>
+          </div>
+        </div>
+      </fieldset>
+    
     <fieldset>
-      <button name="submit" type="submit" id="contact-submit" 
-        ng-click="salvar()"
-        data-submit="...Enviando">Salvar</button>
+        <button id="contact-submit" type="submit" >Salvar</button>
     </fieldset>
-    
-    
   </form>
+
 </div>
