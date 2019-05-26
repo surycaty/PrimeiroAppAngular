@@ -38,14 +38,11 @@ export class EditarComponent implements OnInit {
     
   }
 
-  atualizarTipo(tipo){
+  atualizarTipo(tipo: string){
     this.mostrarTipoCliente = tipo;
   }
 
-  atualizarRisco(renda) {
-    console.log(renda);
-    this.cliente.risco = 'A'
-
+  atualizarRisco(renda: number) {
     if(renda <= 2000){
       this.cliente.risco = "C";
     } else if (renda <= 8000) {

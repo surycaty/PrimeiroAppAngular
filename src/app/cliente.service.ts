@@ -9,8 +9,6 @@ export class ClienteService {
 
   urlClienteRoot = "http://localhost:8080/cliente";
 
-  //formData : Cliente;
-
   retorno: any;
 
   constructor(private http : HttpClient ) { }
@@ -20,14 +18,10 @@ export class ClienteService {
   }
 
   salvar(cliente: Cliente) {
-    console.log("Inicio Salvar Servico");
-    
-    this.http.post(this.urlClienteRoot + "/salvar", cliente).subscribe(res => this.retorno = res);
-
-    console.log(this.retorno);
+    return this.http.post(this.urlClienteRoot + "/salvar", cliente).subscribe(res => this.retorno = res);
   }
 
-  getCliente(id) {
+  getCliente(id: number) {
     return this.http.get(this.urlClienteRoot + "/consultar?id=" + id);
   }
 }

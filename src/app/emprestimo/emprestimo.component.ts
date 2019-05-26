@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Emprestimo } from '../model/emprestimo.model';
+import { Cliente } from '../model/cliente.model';
+import { ClienteService } from '../cliente.service';
 
 @Component({
   selector: 'app-emprestimo',
@@ -7,35 +11,51 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EmprestimoComponent implements OnInit {
 
-  constructor() { }
+	idCliente: number;
+	cliente: Cliente;
+	emprestimo: Emprestimo;
+	isCalculado = false;
+
+  constructor(private route: ActivatedRoute, private servico: ClienteService) { }
 
   ngOnInit() {
+
+		this.cliente = new Cliente();
+		this.emprestimo = new Emprestimo();
+
+    this.route.params.subscribe(p => this.idCliente = p.id);
+
+    this.servico.getCliente(this.idCliente).subscribe((cliente: Cliente) =>  {
+			this.cliente = cliente;
+
+			this.emprestimo.riscoCliente = this.cliente.risco;
+
+    });
   }
 
   /**
 	 * Calcular Emprestimo baseado na 
 	 * Fórmula do cálculo do coeficiente de financiamento
-	 * 
 	 */
-  calcularEmprestimo(emprestimo){
-
-		if( emprestimo.riscoCliente != null && emprestimo.riscoCliente == "A") {
-			emprestimo.setTaxaJuros(1.9);
-		} else if( emprestimo.riscoCliente != null && emprestimo.riscoCliente == "B") {
-			emprestimo.setTaxaJuros(5.0);
+  onSubmit(){
+		console.log("inicio Calcular Emprestimo");
+		if( this.emprestimo.riscoCliente != null && this.emprestimo.riscoCliente == "A") {
+			this.emprestimo.taxaJuros = 1.9;
+		} else if( this.emprestimo.riscoCliente != null && this.emprestimo.riscoCliente == "B") {
+			this.emprestimo.taxaJuros = 5.0;
 		} else {
-			emprestimo.setTaxaJuros(10.0);
+			this.emprestimo.taxaJuros = 10.0;
 		}
 		
-		var tx = emprestimo.taxaJuros/100;
-		var valorExpo = Math.pow(1+(tx), emprestimo.numeroParcela);
+		var tx = this.emprestimo.taxaJuros/100;
+		var valorExpo = Math.pow(1+(tx), this.emprestimo.numeroParcela);
 		
 		var cf = ( (tx) / (1 - (1 / valorExpo)) );
 
-		emprestimo.valorParcela = (this.arredondar(emprestimo.getValorEmprestimo() * cf));
-		emprestimo.valorCalculado = (this.arredondar(emprestimo.getValorParcela() * emprestimo.getNumeroParcela()));
+		this.emprestimo.valorParcela = (this.arredondar(this.emprestimo.valorEmprestimo * cf));
+		this.emprestimo.valorCalculado = (this.arredondar(this.emprestimo.valorParcela * this.emprestimo.numeroParcela));
 
-    return emprestimo;
+		this.isCalculado = true;
     
   }
 
@@ -45,11 +65,9 @@ export class EmprestimoComponent implements OnInit {
 	 * @param valor
 	 * @return
 	 */
-	arredondar(valor) {
-		/*DecimalFormat df = new DecimalFormat("0.00", DecimalFormatSymbols.getInstance(Locale.ENGLISH));
-		df.setRoundingMode(RoundingMode.HALF_UP);
-		return new Double(df.format(valor));*/
-
+	arredondar(valor: number) {
+		return Number.parseFloat(valor.toFixed(2));
+		
   }
 
 }

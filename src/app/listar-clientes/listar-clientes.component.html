@@ -2,8 +2,6 @@
 		<div id="contact" class="content" >
 		
 			<h3>Prova DBC</h3>
-      
-			<app-navbar></app-navbar>
 
 			<h4>Cadastro de Cliente</h4>
 			
@@ -26,7 +24,7 @@
 							<td>{{ cliente.nomeCliente }}</td>
 							<td>{{ cliente.rendimentoMensal}}</td>
 		
-							<td><a href="simulador/{{cliente.codigoCliente}}">Simular Emprestimo</a></td>
+							<td><a href="simular/{{cliente.codigoCliente}}">Simular Emprestimo</a></td>
 							<td><a href="editar/{{cliente.codigoCliente}}">Editar</a></td>
 							<td><a href="#"
 								onClick="excluirRegistro(cliente.codigoCliente)">Excluir</a></td>

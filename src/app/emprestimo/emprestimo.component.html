@@ -1,3 +1,53 @@
-<p>
-  emprestimo works!
-</p>
+<div class="container">
+
+  <form id="contact" (ngSubmit)="onSubmit()">
+
+      <h3>Prova DBC</h3>
+
+      <h4>Simular Emprestimo</h4>
+
+      <fieldset>
+				<label for="nomeCliente">Nome Cliente:</label> 
+        <input id="nomeCliente" name="nomeCliente" type="text" 
+                [(ngModel)]="cliente.nomeCliente" disabled="disabled" readonly="readonly" />
+			</fieldset>
+
+      <fieldset>
+				<label for="rendimentoMensal">Renda Mensal:</label> 
+				<input id="rendimentoMensal" type="text" name="rendimentoMensal" 
+					      [(ngModel)]="cliente.rendimentoMensal" disabled="disabled" readonly="readonly" />
+			</fieldset>
+
+			<fieldset>
+				<label for="risco">Risco:</label> 
+        <input id="risco" name="risco" type="text" id="input-risco" 
+                [(ngModel)]="cliente.risco" disabled="disabled" readonly="readonly" />
+			</fieldset>
+
+			<fieldset>
+				<label for="valor">Valor Empréstimo</label> 
+				<input id="valor" name="valor" type="text" [(ngModel)]="emprestimo.valorEmprestimo" required />
+			</fieldset>
+
+			<fieldset>
+				<label for="parcelas">N Parcelas</label>
+				<input id="parcelas" name="parcelas" type="number" [(ngModel)]="emprestimo.numeroParcela" required numeric-only />
+			</fieldset>
+
+      <div *ngIf="isCalculado">
+        <fieldset>
+          Valor Parcela: {{emprestimo.valorParcela | currency: 'BRL' }}
+        </fieldset>
+        
+        <fieldset>
+          Total à Pagar: {{emprestimo.valorCalculado | currency: 'BRL' }}
+        </fieldset>
+      </div>
+
+			<fieldset>
+				<button name="submit" type="submit" id="contact-submit">Calcular Empréstimo</button>
+			</fieldset>
+
+  </form>
+
+</div>
